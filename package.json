@@ -1,0 +1,38 @@
+{
+  "name": "heroesjs",
+  "version": "0.0.0",
+  "description": "HOMM3 to js",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "file-loader": "~0.8.1",
+    "url-loader": "~0.5.5",
+    "style-loader": "~0.8.3",
+    "traceur": "0.0.84"
+  },
+  "devDependencies": {
+    "style-loader": "~0.8.3",
+    "url-loader": "~0.5.5",
+    "webpack": "~1.5.3",
+    "6to5-core": "~3.6.4",
+    "6to5-loader": "~3.0.0",
+    "webpack-traceur-loader": "~0.3.0"
+  },
+  "scripts": {
+    "start":"webpack --watch",
+    "test": "test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deanshub/heroesjs.git"
+  },
+  "keywords": [
+    "heroes",
+    "homm",
+    "homm3"
+  ],
+  "author": "Dean Shub & Yaniv Israel",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/deanshub/heroesjs/issues"
+  }
+}
