@@ -4,11 +4,11 @@ export class Building{
 		type,
 		dependencies=[],
 		cost=null,
-		abilities=[]
+		ability=null
 	){
 		this.type = type;
 		this.dependencies = dependencies;
 		this.cost = cost;
-		this.abilities = abilities;
+		this.ability = ability;
 	}
 }

@@ -1,5 +1,5 @@
+'use strict';
 export function print(instanse) {
-	'use strict';
 	var output='';
 	for(var prop in instanse){
 		if (typeof instanse[prop] != 'function')

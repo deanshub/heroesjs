@@ -3,6 +3,7 @@ export class Player{
 	constructor(
 		heroes = [],
 		homes = [],
+		buildings = [],
 		resources = {
 			gold:0,
 			silver:0,
@@ -14,6 +15,7 @@ export class Player{
 		// this.map = map
 		this.heroes = heroes;
 		this.homes = homes;
+		this.buildings = buildings;
 		this.resources = resources;
 	}
 }

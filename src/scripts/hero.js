@@ -15,10 +15,11 @@ export class Hero{
 			body:null,
 			leftLeg:null,
 			rightLeg:null
-		}, 
-		skills=[], 
-		speed=5, 
-		exp=1
+		},
+		artifactBox = [],
+		skills = [], 
+		speed = 5, 
+		exp = 1
 	){
 		this.attack = attack;
 		this.defense = defense;
@@ -27,6 +28,7 @@ export class Hero{
 		this.magicks = magicks;
 		this.warriors = warriors;
 		this.artifacts = artifacts;
+		this.artifactBox = artifactBox;
 		this.skills = skills;
 		this.speed = speed;
 		this.exp = exp;
