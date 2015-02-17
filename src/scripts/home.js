@@ -2,7 +2,11 @@
 export class Home{
 	constructor(
 		buildings = {
-			hall : null,
+			hall : {ability: function(player){
+					  	console.log('ability Town Hall was called...');
+					  	player.resources.gold += 1000;
+					  }
+					 },
 			tower : null,
 			tavern : null,
 			blacksmith : null,

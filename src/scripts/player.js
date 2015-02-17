@@ -1,4 +1,7 @@
 'use strict';
+import { Hero } from './hero';
+//import { Home } from './home';
+//import { Hero } from './hero';
 export class Player{
 	constructor(
 		color,
@@ -10,7 +13,7 @@ export class Player{
 					  }
 					 }}],
 		resources = {
-			gold:0,
+			gold:300,
 			woods:0,
 			stones:0,
 			jems:0
@@ -27,6 +30,37 @@ export class Player{
 	}
 
 	playTurn(){
+		var action;
 		console.log(this.color + ' turn played...');
+		do {
+			action = prompt('Enter an action:');
+			switch (action){
+				case 'buy hero':
+					this.buyHero();
+					break;
+				case 'heroActions':
+					this.heroes[prompt('choose an hero number between 1-' + this.heroes.length)-1].heroAction();
+					break;
+				default:
+					break;
+			}
+		} while (action != 'e');
+		console.log(action);
+	}
+
+	buyHero(){
+		var newHero = new Hero();
+		if (this.canAfford(250)){
+			this.heroes.push(newHero);
+			this.resources.gold -= 250;
+		}
+	}
+
+	canAfford(value){
+		if (this.resources.gold >= value){
+			return true;
+		}
+		console.log('Sorry you cannot afford to buy this one...');
+		return false;
 	}
 }

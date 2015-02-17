@@ -32,5 +32,29 @@ export class Hero{
 		this.skills = skills;
 		this.speed = speed;
 		this.exp = exp;
+		this.speedTrun = speed;
+	}
+
+	heroAction(){
+		var action = prompt('choose an heroAction:');
+		switch(action){
+			case 'Walk':
+				this.walk();
+				break;
+			default:
+				break;
+		}
+	}
+
+	walk(){
+		if (this.speedTrun === 0) {
+			var steps = prompt('who many steps?');
+			if (steps > this.speedTrun){
+				console.log(`you are going only ${this.speedTrun} steps`);
+				this.speedTrun = 0;
+			} else {
+				this.speedTrun -= steps;
+			}
+		}
 	}
 }
