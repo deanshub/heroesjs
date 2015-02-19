@@ -1,10 +1,11 @@
 'use strict';
 export class Home{
 	constructor(
+		relevance = null,
 		buildings = {
-			hall : {ability: function(player){
+			hall : {ability: function(owner){
 					  	console.log('ability Town Hall was called...');
-					  	player.resources.gold += 1000;
+					  	owner.resources.gold += 1000;
 					  }
 					 },
 			tower : null,
@@ -30,6 +31,7 @@ export class Home{
 		hero = null,
 		built = false
 	){
+		this.relevance = relevance;
 		this.buildings = buildings;
 		this.type = type;
 		this.warriors = warriors;

@@ -6,12 +6,6 @@ export class Player{
 	constructor(
 		color,
 		heroes = [],
-		homes = [],
-		buildings = [{resourceWood : {ability: function(){
-					  	console.log('ability resourceWood was called...');
-					  	this.resources.woods += 2;
-					  }
-					 }}],
 		resources = {
 			gold:300,
 			woods:0,
@@ -22,14 +16,11 @@ export class Player{
 	){
 		// this.map = map
 		this.heroes = heroes;
-		this.homes = homes;
-		this.buildings = buildings;
 		this.resources = resources;
 		this.color = color;
-		this.buildings = buildings;
 	}
 
-	playTurn(){
+	playTurn(map){
 		var action;
 		console.log(this.color + ' turn played...');
 		do {
@@ -39,7 +30,7 @@ export class Player{
 					this.buyHero();
 					break;
 				case 'heroActions':
-					this.heroes[prompt('choose an hero number between 1-' + this.heroes.length)-1].heroAction();
+					this.heroes[prompt('choose a hero number between 1-' + this.heroes.length)-1].heroAction(map,this);
 					break;
 				default:
 					break;
