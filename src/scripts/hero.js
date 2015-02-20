@@ -35,11 +35,11 @@ export class Hero{
 		this.speedTrun = speed;
 	}
 
-	heroAction(map,player){
-		var action = prompt('choose an heroAction:');
+	promptAction(map, player){
+		var action = prompt('choose an action:');
 		switch(action){
 			case 'Walk':
-				this.walk.call(this);
+				this.walk();
 				break;
 			case 'Caputre A building':
 				this.captureBuilding(map,player);
@@ -49,7 +49,7 @@ export class Hero{
 		}
 	}
 
-	heroInit(){
+	initialize(){
 		this.speedTrun = this.speed;
 	}
 
@@ -59,7 +59,7 @@ export class Hero{
 	// Walking on map
 	walk(){
 		if (this.speedTrun !== 0) {
-			var steps = prompt('who many steps?');
+			let steps = prompt('how many steps?');
 			if (steps > this.speedTrun){
 				console.log(`you are going only ${this.speedTrun} steps`);
 				this.speedTrun = 0;
@@ -71,9 +71,9 @@ export class Hero{
 
 	// Capturing a building in the map
 	captureBuilding(map,player){
-		var idOnMap = prompt(`choose the id of the captured building [1-${map.content.buildings.length}]:`);
-		map.content.buildings[idOnMap-1].relevance = player;
-		console.log(map.content.buildings);
+		let idOnMap = prompt(`choose the id of the captured building [1-${map.buildings.length}]:`);
+		map.buildings[idOnMap-1].owner = player;
+		console.log(map.buildings);
 	}
 
 	fightAWarrior(map,warrior){

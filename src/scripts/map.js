@@ -1,43 +1,17 @@
 'use strict';
 export class Map{
 	constructor(
+		view,
 		homes = [],
+		// todo: maybe there is no need for width and height, just view is enough
 		width = 10,
 		height = 10,
-		buildings = [{ type:'resourceWood', 
-							relevance: null,
-							ability: function(){
-					  			console.log('ability resourceWood was called...');
-					  			this.relevance.resources.woods += 2;
-					  		}
-					 },{ type:'resourceWood',
-							relevance: null,
-							ability: function(){
-					  			console.log('ability resourceWood was called...');
-					  			this.relevance.resources.woods += 2;
-					  		}
-					 },{ type:'resourceStones',
-							relevance: null,
-							ability: function(){
-					  			console.log('ability resourceWood was called...');
-					  			this.relevance.resources.stones += 2;
-					  		}
-					 },
-					 { type: 'resourceWarriors',
-							relevance: null,
-							ability: function(isWeekly){
-								if (isWeekly){									
-						  			console.log('this hero can buy warriors!!! if he will get here');
-								}
-					  		}
-					 }
-					 ]
+		buildings = []
 	){
-		this.content = {};
+		this.view = view;
+		this.homes = homes;
 		this.width = width;
 		this.height = height;
-		this.content.homes = homes;
-		this.content.buildings = buildings;
-
+		this.buildings = buildings;
 	}
 }

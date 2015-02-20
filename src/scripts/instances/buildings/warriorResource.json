@@ -1,0 +1,8 @@
+{ 
+	type: 'resourceWarriors',
+	ability: function(isWeekly){
+		if (isWeekly){									
+  			console.log('this hero can buy warriors!!! if he will get here');
+		}
+	}
+}

@@ -1,7 +1,7 @@
 'use strict';
 export function print(instanse) {
-	var output='';
-	for(var prop in instanse){
+	let output='';
+	for(let prop in instanse){
 		switch (typeof instanse[prop]){
 			case 'function':
 				break;
@@ -14,3 +14,5 @@ export function print(instanse) {
 	}
 	return output;
 }
+
+export const MAX_WEEKS_TILL_END = 2;

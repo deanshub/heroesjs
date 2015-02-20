@@ -1,13 +1,9 @@
 'use strict';
 export class Home{
 	constructor(
-		relevance = null,
+		owner = null,
 		buildings = {
-			hall : {ability: function(owner){
-					  	console.log('ability Town Hall was called...');
-					  	owner.resources.gold += 1000;
-					  }
-					 },
+			hall : null,
 			tower : null,
 			tavern : null,
 			blacksmith : null,
@@ -31,7 +27,7 @@ export class Home{
 		hero = null,
 		built = false
 	){
-		this.relevance = relevance;
+		this.owner = owner;
 		this.buildings = buildings;
 		this.type = type;
 		this.warriors = warriors;

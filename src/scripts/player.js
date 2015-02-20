@@ -8,20 +8,20 @@ export class Player{
 		heroes = [],
 		resources = {
 			gold:300,
-			woods:0,
-			stones:0,
+			wood:0,
+			stone:0,
 			jems:0
 		}
-		// map
+		// todo:prvivate view of the map
 	){
-		// this.map = map
+		// this.map = map (for the prvivate view)
 		this.heroes = heroes;
 		this.resources = resources;
 		this.color = color;
 	}
 
 	playTurn(map){
-		var action;
+		let action;
 		console.log(this.color + ' turn played...');
 		do {
 			action = prompt('Enter an action:');
@@ -30,7 +30,7 @@ export class Player{
 					this.buyHero();
 					break;
 				case 'heroActions':
-					this.heroes[prompt('choose a hero number between 1-' + this.heroes.length)-1].heroAction(map,this);
+					this.heroes[prompt('choose a hero number between 1-' + this.heroes.length)-1].promptAction(map, this);
 					break;
 				default:
 					break;
@@ -41,13 +41,15 @@ export class Player{
 
 	// Player's Actions
 	buyHero(){
-		var newHero = new Hero();
+		// todo: make this by param and choose who gives the param
+		let newHero = new Hero();
 		if (this.canAfford(250)){
-			this.heroes.push(newHero);
 			this.resources.gold -= 250;
+			this.heroes.push(newHero);
 		}
 	}
 
+	// todo: this should be a more general function
 	canAfford(value){
 		if (this.resources.gold >= value){
 			return true;

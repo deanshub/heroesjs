@@ -1,5 +1,5 @@
 'use strict';
-import { print } from './general/utils';
+import { print, MAX_WEEKS_TILL_END } from './general/utils';
 import { Hero } from './hero';
 import { Warrior } from './warrior';
 import { Map } from './map';
@@ -33,87 +33,100 @@ var map = new Map(homes);
 // console.log('***Magic:\n',print(magic1));
 
 class Game{
-	constructor(map,players){
-		this.turn = 0;
-		this.day = 0;
-		this.week = 0;
+	constructor(
+		map,
+		players,
+		playerTurn=0,
+		day=0,
+		week=0
+	){
+		this.playerTurn = playerTurn;
+		this.day = day;
+		this.week = week;
 		this.players = players;
 		this.map = map;
 	}
 	
 	winner(){
 		// If there is only one player left on the map - he is the winner
-		if (this.players.length == 1)
+		if (this.players.length == 1){
 			return true;
-		return false;
+		}else{
+			return false;
+		}
 	}
 
 	displayDate(){
 		return (this.day % 7)+1;
 	}
 	
-	dailyInit(){
-		var isWeekInit = this.displayDate()==1;
-		// New week
-		if (isWeekInit)
+	daily(){
+		let newWeek = this.displayDate()==1;
+
+		if (newWeek)
 			this.week++;
 
-		// Players initiation
+		// Players initilization
 		this.players.forEach((player)=>{
 			player.heroes.forEach((hero)=>{
-				hero.heroInit.call(hero);
+				hero.initialize();
 			});
 		});
 
-		// Map initiation
-		this.map.content.buildings.forEach(function(building){
-			if (building.relevance){
-				building.ability.call(building,isWeekInit);
+		// Map initilization
+		this.map.buildings.forEach(function(building){
+			if (building.owner){
+				// todo: check if needs more parameters
+				building.ability(newWeek);
 			}
 		});
 
-		// Homes initiation
-		this.map.content.homes.forEach(function(home){
-			for (var building in home.buildings){
-				if (home.buildings[building] && home.relevance){
-					home.buildings[building].ability.call(home,home.relevance,isWeekInit);
+		// Homes initilization
+		this.map.homes.forEach(function(home){
+			if (home.owner){
+				for (let building in home.buildings){
+					if (home.buildings[building]){
+						home.buildings[building].ability.call(home,home.owner,newWeek);
+					}
 				}
 			}
 		});
 	}
 
-	switchDay(){
+	moveToNextDay(){
 		this.day++;
-		this.dailyInit.call(this);
+		this.daily();
 	}
 
-	switchTrun(){
+	switchPlayerTrun(){
 		// increases the turn by 1 and checks if its time for a new day
-		var numTurn = ++this.turn % this.players.length;
+		let playerIndex = ++this.playerTurn % this.players.length;
 
-		// when all the turns ended it time to switchDay
-		if (numTurn === 0)
-			this.switchDay();
+		// when all the turns ended it time to moveToNextDay
+		if (playerIndex === 0){
+			this.moveToNextDay();
+		}
 
-		return numTurn;
+		return playerIndex;
 	}
 
 	start(){
-		var indexTurn = 0;
-		while (!this.winner() && this.week < 2)
+		let playerIndex = 0;
+		while (!this.winner() && this.week < MAX_WEEKS_TILL_END)
 		{
-			console.log('this.turn = ',this.turn);
+			console.log('this.playerTurn = ',this.playerTurn);
 			console.log('this.week = ',this.week);
 			console.log('this.day  = ',this.displayDate());
 			// players turn
-			this.players[indexTurn].playTurn.call(this.players[indexTurn],this.map);
-			console.log(print(this.players[indexTurn]));
+			// todo:maybe such things should be done with promise
+			this.players[playerIndex].playTurn(this.map);
+			console.log(print(this.players[playerIndex]));
 			// end of turn
-			indexTurn = this.switchTrun();
+			playerIndex = this.switchPlayerTrun();
 		}
 		console.log('Winner is:...[DRUMS]\n',print(this.players[0]));
 	}
 }
-var game = new Game(map,players);
+let game = new Game(map,players);
 console.log('Game begins...');
-game.start.call(game);
+game.start();

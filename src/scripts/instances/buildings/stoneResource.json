@@ -1,0 +1,7 @@
+{
+	type:'resourceStones',
+	ability: function(){
+		console.log('ability resourceWood was called...');
+		this.owner.resources.stones += 2;
+	}
+ }

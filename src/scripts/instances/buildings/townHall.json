@@ -1,0 +1,6 @@
+{
+	ability: function(owner){
+		console.log('ability Town Hall was called...');
+		owner.resources.gold += 1000;
+	}
+}
