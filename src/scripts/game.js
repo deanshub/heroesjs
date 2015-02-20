@@ -42,6 +42,7 @@ class Game{
 	}
 	
 	winner(){
+		// If there is only one player left on the map - he is the winner
 		if (this.players.length == 1)
 			return true;
 		return false;
@@ -53,7 +54,7 @@ class Game{
 	
 	dailyInit(){
 		var isWeekInit = this.displayDate()==1;
-		console.log(isWeekInit);
+		// New week
 		if (isWeekInit)
 			this.week++;
 
@@ -64,13 +65,14 @@ class Game{
 			});
 		});
 
-		// 
+		// Map initiation
 		this.map.content.buildings.forEach(function(building){
 			if (building.relevance){
 				building.ability.call(building,isWeekInit);
 			}
 		});
 
+		// Homes initiation
 		this.map.content.homes.forEach(function(home){
 			for (var building in home.buildings){
 				if (home.buildings[building] && home.relevance){
@@ -86,9 +88,10 @@ class Game{
 	}
 
 	switchTrun(){
+		// increases the turn by 1 and checks if its time for a new day
 		var numTurn = ++this.turn % this.players.length;
 
-		// when 
+		// when all the turns ended it time to switchDay
 		if (numTurn === 0)
 			this.switchDay();
 
@@ -96,7 +99,6 @@ class Game{
 	}
 
 	start(){
-		//function wait () { console.log('...');} 
 		var indexTurn = 0;
 		while (!this.winner() && this.week < 2)
 		{
@@ -108,12 +110,10 @@ class Game{
 			console.log(print(this.players[indexTurn]));
 			// end of turn
 			indexTurn = this.switchTrun();
-			//window.setTimeout(wait(),2000);
 		}
 		console.log('Winner is:...[DRUMS]\n',print(this.players[0]));
 	}
 }
 var game = new Game(map,players);
 console.log('Game begins...');
-//console.log(player1.homes);
 game.start.call(game);

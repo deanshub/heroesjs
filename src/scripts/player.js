@@ -39,6 +39,7 @@ export class Player{
 		console.log(action);
 	}
 
+	// Player's Actions
 	buyHero(){
 		var newHero = new Hero();
 		if (this.canAfford(250)){

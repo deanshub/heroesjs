@@ -53,6 +53,10 @@ export class Hero{
 		this.speedTrun = this.speed;
 	}
 
+	// Hero's Actions
+	// --------------
+
+	// Walking on map
 	walk(){
 		if (this.speedTrun !== 0) {
 			var steps = prompt('who many steps?');
@@ -65,9 +69,18 @@ export class Hero{
 		}
 	}
 
+	// Capturing a building in the map
 	captureBuilding(map,player){
 		var idOnMap = prompt(`choose the id of the captured building [1-${map.content.buildings.length}]:`);
 		map.content.buildings[idOnMap-1].relevance = player;
 		console.log(map.content.buildings);
+	}
+
+	fightAWarrior(map,warrior){
+
+	}
+
+	enterToSpecialBuilding(player){
+
 	}
 }
